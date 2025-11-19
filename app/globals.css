@@ -124,3 +124,97 @@ body {
 @media (max-width:640px){
   .alex-overlay-content{ font-size: 28px; padding: 0; }
 }
+
+/* Retro Macintosh desktop styles */
+.desktop-root {
+  position: relative;
+  min-height: 100vh;
+  font-family: 'Chicago', 'Geneva', Arial, sans-serif;
+  color: #000;
+}
+.desktop-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg,#8fb3ff 0%, #6e9fe8 100%);
+  background-size: cover;
+  filter: none;
+}
+.desktop-folder {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+}
+.folder-icon {
+  width: 64px;
+  height: 52px;
+  position: relative;
+}
+.folder-top {
+  position: absolute;
+  left: 4px;
+  top: 0;
+  width: 44px;
+  height: 12px;
+  background: #ffd86b;
+  border: 2px solid #b8860b;
+  border-bottom: none;
+  border-radius: 3px 3px 0 0;
+}
+.folder-body {
+  position: absolute;
+  left: 0;
+  top: 8px;
+  width: 64px;
+  height: 44px;
+  background: #ffdf93;
+  border: 2px solid #b8860b;
+  border-radius: 4px;
+}
+.folder-label {
+  font-size: 12px;
+  background: rgba(255,255,255,0.85);
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(0,0,0,0.08);
+}
+.desktop-instructions {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-size: 13px;
+  color: #001;
+  background: rgba(255,255,255,0.6);
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+@media (max-width:640px){
+  .folder-icon { width:48px; height:38px; }
+  .folder-body { width:48px; height:34px; }
+}
+
+/* Back link on Alex page */
+.alex-back {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  background: rgba(255,255,255,0.92);
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(0,0,0,0.12);
+  color: #000;
+  text-decoration: none;
+  font-size: 13px;
+  z-index: 1200;
+}
+.alex-back:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.12); }
+
+@media (max-width:640px){
+  .alex-back{ top:10px; left:10px; font-size:12px; }
+}
