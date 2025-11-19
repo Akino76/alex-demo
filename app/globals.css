@@ -24,3 +24,103 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Google-old-school inspired styles for Alex homepage */
+.alex-home {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  background: var(--background);
+}
+
+.alex-content {
+  text-align: center;
+}
+
+.alex-logo {
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: 700;
+  font-size: 108px;
+  letter-spacing: -4px;
+  margin-bottom: 24px;
+  line-height: 1;
+}
+.alex-logo span { display: inline-block; transform: translateZ(0); }
+.alex-logo .alex-a { color: #4285F4; }
+.alex-logo .alex-l { color: #DB4437; }
+.alex-logo .alex-e { color: #F4B400; }
+.alex-logo .alex-x { color: #4285F4; }
+
+.alex-search {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 18px 0 22px;
+}
+
+.alex-input {
+  width: 560px;
+  max-width: 90vw;
+  height: 44px;
+  padding: 0 14px 0 12px;
+  border: 1px solid #dfe1e5;
+  border-radius: 24px;
+  box-shadow: 0 1px 6px rgba(32,33,36,0.28);
+  font-size: 16px;
+  outline: none;
+}
+.alex-input:focus {
+  box-shadow: 0 1px 6px rgba(32,33,36,0.28), 0 0 0 4px rgba(66,133,244,0.15);
+  border-color: rgba(66,133,244,0.6);
+}
+
+.alex-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+.alex-btn {
+  background: #f8f9fa;
+  border: 1px solid #f0f0f0;
+  color: #3c4043;
+  padding: 10px 16px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.alex-btn:hover { box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+
+/* Small responsive tweaks */
+@media (max-width:640px){
+  .alex-logo{ font-size:72px; }
+  .alex-input{ width:92vw; }
+}
+
+/* Fullscreen 'please stop' overlay shown when user types */
+.alex-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+.alex-overlay-content {
+  color: #fff;
+  font-size: 64px;
+  font-weight: 700;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  text-transform: none;
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  text-align: center;
+}
+
+@media (max-width:640px){
+  .alex-overlay-content{ font-size: 28px; padding: 0; }
+}
