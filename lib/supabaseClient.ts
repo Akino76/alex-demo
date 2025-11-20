@@ -1,23 +1,24 @@
-import { createClient, SupabaseClient } from '@supabase/supabase-js'
+import type { SupabaseClient } from '@supabase/supabase-js'
 
 let supabase: SupabaseClient | null = null
 
 /**
- * Lazily create and return a Supabase client.
- * This avoids creating the client during server-side prerender/build when
- * NEXT_PUBLIC env vars may not be available. Call this from client code.
+ * Asynchronously import the Supabase SDK and create a client at runtime.
+ * Returns `null` on the server or when env vars are missing.
  */
-export function getSupabaseClient(): SupabaseClient | null {
+export async function getSupabaseClient(): Promise<SupabaseClient | null> {
 	if (supabase) return supabase
+
+	// Avoid creating the client on the server during build/prerender
+	if (typeof window === 'undefined') return null
 
 	const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 	const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+	if (!supabaseUrl || !supabaseAnonKey) return null
 
-	// If env is not available or we're on the server, return null to avoid errors
-	if (!supabaseUrl || !supabaseAnonKey) {
-		if (typeof window === 'undefined') return null
-		throw new Error('Missing NEXT_PUBLIC_SUPABASE_URL or NEXT_PUBLIC_SUPABASE_ANON_KEY')
-	}
+	// dynamically import to avoid running SDK code at module eval time
+	const mod = await import('@supabase/supabase-js')
+	const { createClient } = mod
 
 	supabase = createClient(supabaseUrl, supabaseAnonKey)
 	return supabase

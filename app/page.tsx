@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import getSupabaseClient from "../lib/supabaseClient";
+import getSupabaseClient from "../lib/supabaseClient"; // Importing the Supabase client
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -13,25 +13,27 @@ export default function Home() {
   useEffect(() => {
     // get current session user on mount
     let mounted = true;
-    const client = getSupabaseClient();
-    if (!client) return;
-    client.auth.getUser().then(({ data, error }) => {
+    let listener: any = null;
+
+    (async () => {
+      const client = await getSupabaseClient();
+      if (!client) return;
+
+      const { data, error } = await client.auth.getUser();
       if (!mounted) return;
       if (data?.user) setUser(data.user);
       if (error) console.debug("supabase getUser error:", error);
-    });
 
-    // listen to auth changes
-    const { data: listener } = client.auth.onAuthStateChange(
-      (event, session) => {
+      const res = client.auth.onAuthStateChange((event, session) => {
         if (session?.user) setUser(session.user);
         if (event === "SIGNED_OUT") setUser(null);
-      }
-    );
+      });
+      listener = res?.data;
+    })();
 
     return () => {
       mounted = false;
-      listener?.subscription.unsubscribe();
+      listener?.subscription?.unsubscribe?.();
     };
   }, []);
 
@@ -41,7 +43,7 @@ export default function Home() {
     setError(null);
 
     try {
-      const client = getSupabaseClient();
+      const client = await getSupabaseClient();
       if (!client) throw new Error("Supabase client not available");
       const { data, error } = await client.auth.signInWithPassword({
         email,
@@ -61,7 +63,7 @@ export default function Home() {
 
   const signOut = async () => {
     setLoading(true);
-    const client = getSupabaseClient();
+    const client = await getSupabaseClient();
     if (client) await client.auth.signOut();
     setUser(null);
     setLoading(false);
