@@ -1,220 +1,70 @@
+/* Centered login page styles */
+.login-root {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #e0e7ff 0%, #f8fafc 100%);
+}
+.login-menu {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 6px 32px rgba(0,0,0,0.10);
+  padding: 40px 32px 32px 32px;
+  min-width: 320px;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.login-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  color: #374151;
+  letter-spacing: -1px;
+}
+.login-fields {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-bottom: 28px;
+}
+.login-input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
+  background: #f1f5f9;
+  color: #222;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+}
+.login-input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 2px #6366f133;
+}
+.login-btn {
+  width: 100%;
+  padding: 12px 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #fff;
+  background: linear-gradient(90deg, #6366f1 0%, #60a5fa 100%);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 8px rgba(99,102,241,0.08);
+  transition: background 0.2s;
+}
+.login-btn:hover {
+  background: linear-gradient(90deg, #4f46e5 0%, #2563eb 100%);
+}
 @import "tailwindcss";
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-/* Google-old-school inspired styles for Alex homepage */
-.alex-home {
-  display: flex;
-  min-height: 100vh;
-  align-items: center;
-  justify-content: center;
-  background: var(--background);
-}
-
-.alex-content {
-  text-align: center;
-}
-
-.alex-logo {
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  font-weight: 700;
-  font-size: 108px;
-  letter-spacing: -4px;
-  margin-bottom: 24px;
-  line-height: 1;
-}
-.alex-logo span { display: inline-block; transform: translateZ(0); }
-.alex-logo .alex-a { color: #4285F4; }
-.alex-logo .alex-l { color: #DB4437; }
-.alex-logo .alex-e { color: #F4B400; }
-.alex-logo .alex-x { color: #4285F4; }
-
-.alex-search {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin: 18px 0 22px;
-}
-
-.alex-input {
-  width: 560px;
-  max-width: 90vw;
-  height: 44px;
-  padding: 0 14px 0 12px;
-  border: 1px solid #dfe1e5;
-  border-radius: 24px;
-  box-shadow: 0 1px 6px rgba(32,33,36,0.28);
-  font-size: 16px;
-  outline: none;
-}
-.alex-input:focus {
-  box-shadow: 0 1px 6px rgba(32,33,36,0.28), 0 0 0 4px rgba(66,133,244,0.15);
-  border-color: rgba(66,133,244,0.6);
-}
-
-.alex-buttons {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-}
-.alex-btn {
-  background: #f8f9fa;
-  border: 1px solid #f0f0f0;
-  color: #3c4043;
-  padding: 10px 16px;
-  font-size: 14px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-.alex-btn:hover { box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
-
-/* Small responsive tweaks */
-@media (max-width:640px){
-  .alex-logo{ font-size:72px; }
-  .alex-input{ width:92vw; }
-}
-
-/* Fullscreen 'please stop' overlay shown when user types */
-.alex-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.75);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-.alex-overlay-content {
-  color: #fff;
-  font-size: 64px;
-  font-weight: 700;
-  font-family: Georgia, 'Times New Roman', Times, serif;
-  text-transform: none;
-  padding: 0;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  text-align: center;
-}
-
-@media (max-width:640px){
-  .alex-overlay-content{ font-size: 28px; padding: 0; }
-}
-
-/* Retro Macintosh desktop styles */
-.desktop-root {
-  position: relative;
-  min-height: 100vh;
-  font-family: 'Chicago', 'Geneva', Arial, sans-serif;
-  color: #000;
-}
-.desktop-bg {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg,#8fb3ff 0%, #6e9fe8 100%);
-  background-size: cover;
-  filter: none;
-}
-.desktop-folder {
-  position: absolute;
-  top: 24px;
-  left: 24px;
-  text-decoration: none;
-  color: inherit;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 6px;
-}
-.folder-icon {
-  width: 64px;
-  height: 52px;
-  position: relative;
-}
-.folder-top {
-  position: absolute;
-  left: 4px;
-  top: 0;
-  width: 44px;
-  height: 12px;
-  background: #ffd86b;
-  border: 2px solid #b8860b;
-  border-bottom: none;
-  border-radius: 3px 3px 0 0;
-}
-.folder-body {
-  position: absolute;
-  left: 0;
-  top: 8px;
-  width: 64px;
-  height: 44px;
-  background: #ffdf93;
-  border: 2px solid #b8860b;
-  border-radius: 4px;
-}
-.folder-label {
-  font-size: 12px;
-  background: rgba(255,255,255,0.85);
-  padding: 2px 6px;
-  border-radius: 4px;
-  border: 1px solid rgba(0,0,0,0.08);
-}
-.desktop-instructions {
-  position: absolute;
-  bottom: 20px;
-  left: 20px;
-  font-size: 13px;
-  color: #001;
-  background: rgba(255,255,255,0.6);
-  padding: 6px 10px;
-  border-radius: 6px;
-}
-
-@media (max-width:640px){
-  .folder-icon { width:48px; height:38px; }
-  .folder-body { width:48px; height:34px; }
-}
-
-/* Back link on Alex page */
-.alex-back {
-  position: fixed;
-  top: 14px;
-  left: 14px;
-  background: rgba(255,255,255,0.92);
-  padding: 6px 10px;
-  border-radius: 6px;
-  border: 1px solid rgba(0,0,0,0.12);
-  color: #000;
-  text-decoration: none;
-  font-size: 13px;
-  z-index: 1200;
-}
-.alex-back:hover { box-shadow: 0 2px 6px rgba(0,0,0,0.12); }
-
-@media (max-width:640px){
-  .alex-back{ top:10px; left:10px; font-size:12px; }
 }
