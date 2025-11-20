@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import supabase from "../lib/supabaseClient";
+import getSupabaseClient from "../lib/supabaseClient";
 
 export default function Home() {
   const [email, setEmail] = useState("");
@@ -13,14 +13,16 @@ export default function Home() {
   useEffect(() => {
     // get current session user on mount
     let mounted = true;
-    supabase.auth.getUser().then(({ data, error }) => {
+    const client = getSupabaseClient();
+    if (!client) return;
+    client.auth.getUser().then(({ data, error }) => {
       if (!mounted) return;
       if (data?.user) setUser(data.user);
       if (error) console.debug("supabase getUser error:", error);
     });
 
     // listen to auth changes
-    const { data: listener } = supabase.auth.onAuthStateChange(
+    const { data: listener } = client.auth.onAuthStateChange(
       (event, session) => {
         if (session?.user) setUser(session.user);
         if (event === "SIGNED_OUT") setUser(null);
@@ -39,7 +41,9 @@ export default function Home() {
     setError(null);
 
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const client = getSupabaseClient();
+      if (!client) throw new Error("Supabase client not available");
+      const { data, error } = await client.auth.signInWithPassword({
         email,
         password,
       });
@@ -57,7 +61,8 @@ export default function Home() {
 
   const signOut = async () => {
     setLoading(true);
-    await supabase.auth.signOut();
+    const client = getSupabaseClient();
+    if (client) await client.auth.signOut();
     setUser(null);
     setLoading(false);
   };
